@@ -1,0 +1,40 @@
+{
+    "name": "baymax",
+    "version": "0.1.0",
+    "description": "Bot makes WeChat great again.",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc --build",
+        "clean": "tsc --build --clean",
+        "start": "pm2 start ecosystem.config.js",
+        "stop": "pm2 stop --silent ecosystem.config.js",
+        "dev-start": "pm2-dev --ignore-watch start ecosystem.config.js"
+    },
+    "keywords": [
+        "bot",
+        "wechat"
+    ],
+    "author": "Cokile",
+    "license": "MIT",
+    "dependencies": {
+        "array-shuffle": "^2.0.0",
+        "axios": "^0.27.2",
+        "node-schedule": "^2.1.0",
+        "puppeteer": "^16.0.0",
+        "ts-md5": "^1.2.11",
+        "wechaty": "^1.20.2",
+        "wechaty-puppet": "^1.19.6",
+        "wechaty-puppet-padlocal": "^1.11.18",
+        "xml2js": "^0.4.23"
+    },
+    "devDependencies": {
+        "@types/node-schedule": "^2.1.0",
+        "@types/xml2js": "^0.4.11",
+        "@typescript-eslint/eslint-plugin": "^5.31.0",
+        "@typescript-eslint/parser": "^5.31.0",
+        "eslint": "^8.20.0",
+        "eslint-config-google": "^0.14.0",
+        "pm2": "^5.2.0",
+        "typescript": "^4.7.4"
+    }
+}

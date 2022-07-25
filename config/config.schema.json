@@ -1,0 +1,221 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://github.com/Cokile/baymax/tree/master/config/config.schema.json",
+    "title": "Configuration for baymax.",
+    "type": "object",
+    "required": [
+        "puppet_token"
+    ],
+    "properties": {
+        "puppet_token": {
+            "type": "string",
+            "description": "The token of the padlocal puppet. Please visit https://github.com/wechaty/puppet-padlocal for more information."
+        },
+        "message_handler": {
+            "type": "object",
+            "description": "Configuration for message handlers.",
+            "properties": {
+                "command": {
+                    "type": "object",
+                    "description": "Configuration for message command handler.",
+                    "required": [
+                        "commands"
+                    ],
+                    "properties": {
+                        "commands": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "description": "The message command name that will be registered for the bot to invoke. Current support values are 'baike', 'pet', 'quote'."
+                            }
+                        },
+                        "user_allow_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "description": "The wechat id for users that can invoke non-general message commands."
+                            }
+                        },
+                        "group_allow_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "description": "The id for groups that members from it can invoke non-general message commands."
+                            }
+                        }
+                    }
+                },
+                "recall": {
+                    "type": "object",
+                    "description": "Configuration for message recall handler.",
+                    "required": [
+                        "group_ids"
+                    ],
+                    "properties": {
+                        "group_ids": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "description": "The id for groups that recalled message in it will be echoed."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "cron_command": {
+            "type": "object",
+            "description": "Configuration for cron commands. Cron commands are designed for group.",
+            "required": [
+                "commands"
+            ],
+            "properties": {
+                "commands": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "The cron command name that will be registered for the bot to invoke. Current support values are 'birthday', 'cat', 'reminder', 'weather'."
+                    }
+                },
+                "birthday": {
+                    "type": "object",
+                    "description": "Configuration for birthday cron command. Birtyday command sends a happy birthday text to person at the configured date.",
+                    "required": [
+                        "texts",
+                        "people"
+                    ],
+                    "properties": {
+                        "texts": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "description": "Happy Birtyday texts. Baymax will randomly choose one to use."
+                            }
+                        },
+                        "people": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "description": "Person to send happy birthday text.",
+                                "required": [
+                                    "pattern",
+                                    "group_name",
+                                    "wechat_id",
+                                    "fallback_name"
+                                ],
+                                "properties": {
+                                    "pattern": {
+                                        "type": "string",
+                                        "description": "The cron pattern for the date to send happy birthday text."
+                                    },
+                                    "group_name": {
+                                        "type": "string",
+                                        "description": "The group name that the person in it."
+                                    },
+                                    "wechat_id": {
+                                        "type": "string",
+                                        "description": "The wechat of the person."
+                                    },
+                                    "fallback_name": {
+                                        "type": "string",
+                                        "description": "The name of the person that used as a fallback when the person cannot be found with wechat id in the group."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "cat": {
+                    "type": "array",
+                    "description": "Configuration for cat cron command. Cat command sends a cat picture at the configured date.",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "pattern",
+                            "group_name"
+                        ],
+                        "properties": {
+                            "pattern": {
+                                "type": "string",
+                                "description": "The cron pattern for the date to send cat picture."
+                            },
+                            "group_name": {
+                                "type": "string",
+                                "description": "The name of group to send cat picture."
+                            }
+                        }
+                    }
+                },
+                "reminder": {
+                    "type": "array",
+                    "description": "Configuration for reminder cron command. Reminder command act as a general solution to send reminder text at the configured date.",
+                    "items": {
+                        "required": [
+                            "pattern",
+                            "group_name",
+                            "id",
+                            "text"
+                        ],
+                        "properties": {
+                            "pattern": {
+                                "type": "string",
+                                "description": "The cron pattern for the date to send reminder text."
+                            },
+                            "group_name": {
+                                "type": "string",
+                                "description": "The name of group to send reminder text."
+                            },
+                            "id": {
+                                "type": "string",
+                                "description": "A unique string that identifier the reminder."
+                            },
+                            "texts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "Reminder texts. Baymax will randomly choose one to use."
+                                }
+                            }
+                        }
+                    }
+                },
+                "weather": {
+                    "type": "object",
+                    "description": "Configuration for weather cron command. Weather command send weather report to a group at the configured time.",
+                    "required": [
+                        "api_token",
+                        "groups"
+                    ],
+                    "properties": {
+                        "api_token": {
+                            "type": "string",
+                            "description": "The token for the QWeather API. Please visit https://dev.qweather.com for more information."
+                        },
+                        "groups": {
+                            "type": "array",
+                            "required": [
+                                "pattern",
+                                "name",
+                                "location"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name of the group to send the weather report."
+                                },
+                                "pattern": {
+                                    "type": "string",
+                                    "description": "The cron pattern for the date to send weather report."
+                                },
+                                "location": {
+                                    "type": "string",
+                                    "description": "The geographical coordinates for the weather report. e.g. 90.14,110.23"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

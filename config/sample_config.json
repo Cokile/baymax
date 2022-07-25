@@ -1,0 +1,88 @@
+{
+    "puppet_token": "puppet_padlocal_xxxx",
+    "message_handler": {
+        "command": {
+            "commands": [
+                "baike",
+                "pet",
+                "quote"
+            ],
+            "user_allow_list": [
+                "wxid_aaaaaaaaaaaaaa",
+                "wxid_bbbbbbbbbbbbbb"
+            ],
+            "group_allow_list": [
+                "11111111111@chatroom",
+                "22222222222@chatroom"
+            ]
+        },
+        "recall": {
+            "group_ids": [
+                "11111111111@chatroom",
+                "22222222222@chatroom"
+            ]
+        }
+    },
+    "cron_command": {
+        "commands": [
+            "birthday",
+            "cat",
+            "reminder",
+            "weather"
+        ],
+        "birthday": {
+            "texts": [
+                "Happy Birtyday! 🎉",
+                "生日快乐！🎂"
+            ],
+            "people": [
+                {
+                    "group_name": "My Group Name",
+                    "pattern": "0 0 1 1 *",
+                    "wechat_id": "wxid_aaaaaaaaaaaaaa",
+                    "fallback_name": "Alice"
+                },
+                {
+                    "group_name": "My Group Name",
+                    "pattern": "0 0 2 2 *",
+                    "wechat_id": "wxid_bbbbbbbbbbbbbb",
+                    "fallback_name": "Bob"
+                }
+            ]
+        },
+        "cat": [
+            {
+                "group_name": "My Group Name",
+                "pattern": "0 15 * * *"
+            }
+        ],
+        "reminder": [
+            {
+                "id": "sweet-time",
+                "group_name": "My Group Name",
+                "pattern": "0 15 * * 3",
+                "texts": [
+                    "Time for sweet!"
+                ]
+            },
+            {
+                "id": "happy-hour",
+                "group_name": "My Group Name",
+                "pattern": "0 16 * * 5",
+                "texts": [
+                    "Time for happy hour!"
+                ]
+            }
+        ],
+        "weather": {
+            "api_token": "xxxxxxx",
+            "groups": [
+                {
+                    "name": "My Group Name",
+                    "pattern": "0 9 * * *",
+                    "location": "90.14,110.23"
+                }
+            ]
+        }
+    }
+}
